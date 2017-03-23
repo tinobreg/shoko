@@ -26,7 +26,6 @@ class ListController extends Controller
     /**
      * Displays homepage.
      * @param $idUser integer
-     * @param $idDate integer
      * @return mixed
      */
     public function actionIndex($idUser)
@@ -59,7 +58,11 @@ class ListController extends Controller
             }
             return $this->refresh();
         }
-        return $this->render('index', ['model'=>$model]);
+        return $this->render('index', [
+            'model'=>$model,
+            'idUser'=>$idUser,
+            'list'=>$user->userData0->listName
+        ]);
     }
 
     /**

@@ -45,7 +45,7 @@ class ListController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'date'=>$date
+            'date'=>$date,
         ]);
     }
 
