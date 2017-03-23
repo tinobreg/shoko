@@ -1,53 +1,31 @@
 <?php
 
+use yii\helpers\Url;
 /* @var $this yii\web\View */
+/* @var $users /common/models/User[] */
 
-$this->title = 'My Yii Application';
+$this->title = '.: Shôko Bs As :.';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
+<div class="site-index" style="min-height: 600px">
     <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+        <div class="row text-center">
+            <div class="col-xs-12" style="padding: 40px 0">
+                <h1>Bienvenido a la revolución!</h1>
+                <p class="lead">Av. La Plata 735 - Caballito - Buenos Aires</p>
             </div>
         </div>
 
+        <div class="row" style="padding-bottom: 20px">
+            <div class="col-xs-12 text-center">
+                <h2>Listas :</h2>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px">
+            <?php foreach($users as $user){?>
+                <div class="col-xs-6 col-sm-3">
+                    <?=\yii\helpers\Html::a($user->userData0->listName, ['list/index', 'idUser'=>$user->id], ['class'=>'btn btn-block btn-shoko', 'style'=>'margin-bottom: 15px']);?>
+                </div>
+            <?php } ?>
+        </div>
     </div>
 </div>
