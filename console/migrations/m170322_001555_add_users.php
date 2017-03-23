@@ -67,6 +67,31 @@ class m170322_001555_add_users extends Migration
                 'username'=>'Agustin Gris',
                 'email'=>'agus_eventos@hotmail.com',
                 'listName'=>'Agus Gris',
+            ],
+            [
+                'username'=>'Gaston Salibe',
+                'email'=>'gsalibe@gmail.com',
+                'listName'=>'Gaston Salibe',
+            ],
+            [
+                'username'=>'Gonzalo Grau',
+                'email'=>'barrasgonza@hotmail.com',
+                'listName'=>'Gonza Kravi',
+            ],
+            [
+                'username'=>'Camila Capria',
+                'email'=>'cam_capria@hotmail.com',
+                'listName'=>'Cami Capria',
+            ],
+            [
+                'username'=>'Narella Versace',
+                'email'=>'nareversace@hotmail.com',
+                'listName'=>'Narella Versace',
+            ],
+            [
+                'username'=>'Matheus Mocciola',
+                'email'=>'matheusmocciola10@gmail.com',
+                'listName'=>'Matheus Mocciola',
             ]
         ];
 

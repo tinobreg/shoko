@@ -11,6 +11,7 @@ class m170309_030905_create_base_db extends Migration
         $this->createTable('date', array(
             'idDate' => Schema::TYPE_PK,
             'date' => Schema::TYPE_INTEGER.' NOT NULL',
+            'status' => Schema::TYPE_INTEGER.' NOT NULL',
         ), $this->tableOptions);
 
         $this->createTable('vip', array(

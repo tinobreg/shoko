@@ -11,6 +11,7 @@ use Yii;
  *
  * @property integer $idDate
  * @property integer $date
+ * @property integer $status
  *
  * @property \common\models\Reservation[] $reservations
  * @property string $aliasModel
@@ -35,8 +36,8 @@ abstract class Date extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date'], 'required'],
-            [['date'], 'integer']
+            [['date', 'status'], 'required'],
+            [['date', 'status'], 'integer']
         ];
     }
 
@@ -48,6 +49,7 @@ abstract class Date extends \yii\db\ActiveRecord
         return [
             'idDate' => 'Id Date',
             'date' => 'Date',
+            'status' => 'Estado'
         ];
     }
 

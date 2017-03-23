@@ -11,24 +11,7 @@ use yii\helpers\ArrayHelper;
  */
 class Date extends BaseDate
 {
-
-public function behaviors()
-    {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
-    }
-
-    public function rules()
-    {
-        return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
-        );
-    }
+    const STATUS_INACTIVE = 1;
+    const STATUS_ACTIVE = 2;
+    const STATUS_DONE = 3;
 }

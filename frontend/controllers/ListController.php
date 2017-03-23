@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Date;
 use common\models\ListFriday;
 use common\models\User;
 use frontend\models\ListForm;
@@ -28,9 +29,10 @@ class ListController extends Controller
      * @param $idDate integer
      * @return mixed
      */
-    public function actionIndex($idDate, $idUser)
+    public function actionIndex($idUser)
     {
         $user = User::findById($idUser);
+        $date = Date::findOne(['status'=>Date::STATUS_ACTIVE]);
         $model = new ListForm();
         $model->listOwner = $user->userData0->listName;
         if ($model->load(Yii::$app->request->post())){
@@ -38,22 +40,26 @@ class ListController extends Controller
                 $list = new ListFriday();
                 $list->name = $model->name;
                 $list->lastName = $model->lastName;
-                $list->birthday = strtotime($model->birthday);
+                $list->birthday = (int)strtotime($model->birthday);
                 $list->instagram = $model->instagram;
                 $list->phone =  $model->phone;
                 $list->idUser = $idUser;
-                $list->idDate = $idDate;
+                $list->idDate = $date->idDate;
                 if($list->save()){
                     Yii::$app->session->setFlash('success', 'Ya estás anotado/a en lista');
                 } else {
-                    Yii::$app->session->setFlash('error', 'Hubo un error, por favor intenta de nuevo.');
+                    Yii::$app->session->setFlash('error', 'Por favor verifica tus datos');
+                    echo '<pre>';
+                    var_dump($list->getErrors());
+                        echo '</pre>';
+                    return $this->render('index', ['model'=>$model]);
                 }
             }else{
                 Yii::$app->session->setFlash('error', 'Hubo un error, por favor intenta de nuevo.');
             }
             return $this->refresh();
         }
-        return $this->render('index', ['form'=>$model]);
+        return $this->render('index', ['model'=>$model]);
     }
 
     /**

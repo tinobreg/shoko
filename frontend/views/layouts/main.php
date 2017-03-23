@@ -25,20 +25,17 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Shoko Bs As',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    NavBar::end();
-    ?>
+<div class="wrap background-image"style="padding: 20px 0">
+    <?= Alert::widget() ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" align="center" >
+                <?=Html::a(\yii\helpers\Html::img(Yii::$app->params['imageBaseUrl'].'images/shoko.png', ['class'=>'img-responsive', 'style'=>'height:60px']),Yii::$app->homeUrl)?>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
-        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>

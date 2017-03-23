@@ -36,12 +36,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Reserva', 'url' => ['/reservation/index']],
-        ['label' => 'Date', 'url' => ['/date/index']],
-        ['label' => 'User', 'url' => ['/User/index']],
-        ['label' => 'Vip', 'url' => ['/vip/index']],
-        ['label' => 'Encargado', 'url' => ['/vip-manager/index']],
-        ['label' => 'Mesas', 'url' => ['/table/index']],
+        ['label' => 'Listas', 'url' => ['/list/index', 'idUser'=>Yii::$app->user->identity->getId()]],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

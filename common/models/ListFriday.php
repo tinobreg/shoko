@@ -11,24 +11,20 @@ use yii\helpers\ArrayHelper;
  */
 class ListFriday extends BaseListFriday
 {
-
-public function behaviors()
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
     {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
-    }
-
-    public function rules()
-    {
-        return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
-        );
+        return [
+            'idListFriday' => Yii::t('app', '#'),
+            'idUser' => Yii::t('app', 'Usuario'),
+            'name' => Yii::t('app', 'Nombre'),
+            'lastName' => Yii::t('app', 'Apellido'),
+            'phone' => Yii::t('app', 'Telefono'),
+            'instagram' => Yii::t('app', 'Instagram'),
+            'birthday' => Yii::t('app', 'Cumpleaños'),
+            'idDate' => Yii::t('app', 'Fecha')
+        ];
     }
 }

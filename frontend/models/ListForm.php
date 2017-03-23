@@ -24,7 +24,7 @@ class ListForm extends Model
     public function rules()
     {
         return [
-            [['name', 'lastName', 'phone', 'birthday'], 'required'],
+            [['name', 'lastName', 'phone', 'birthday'], 'required', 'message'=>'{attribute} no puede estar vacío.'],
             [['name', 'lastName', 'phone', 'instagram', 'listOwner', 'birthday'], 'string']
         ];
     }
