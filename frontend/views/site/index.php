@@ -1,6 +1,4 @@
 <?php
-
-use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $users /common/models/User[] */
 

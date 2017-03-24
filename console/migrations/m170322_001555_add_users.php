@@ -9,87 +9,104 @@ class m170322_001555_add_users extends Migration
 
         $users = [
             [
-                'username'=>'Martin Obregon',
+                'username'=>'mobregon',
+                'fullName'=>'Martin Obregon',
                 'email'=>'tinobreg@gmail.com',
                 'listName'=>'Martin Obregon',
             ],
             [
-                'username'=>'Lucas Ballerini',
+                'username'=>'lballerini',
+                'fullName'=>'Lucas Ballerini',
                 'email'=>'luc-1408@hotmail.com',
                 'listName'=>'Lucas Ballerini',
             ],
             [
-                'username'=>'Astrid Carosella',
+                'username'=>'acarosella',
+                'fullName'=>'Astrid Carosella',
                 'email'=>'as.carosella@hotmail.com',
                 'listName'=>'Astrid Carosella',
             ],
             [
-                'username'=>'Mariano De Luca',
+                'username'=>'mdeluca',
+                'fullName'=>'Mariano De Luca',
                 'email'=>'marianoluisdeluca@gmail.com',
                 'listName'=>'Mariano De Luca',
             ],
             [
-                'username'=>'Abril Scazzuso',
+                'username'=>'ascazzuso',
+                'fullName'=>'Abril Scazzuso',
                 'email'=>'abrucecilia12@hotmail.com',
                 'listName'=>'Abril Scazzuso',
             ],
             [
-                'username'=>'Felipe Sosena',
+                'username'=>'fsosena',
+                'fullName'=>'Felipe Sosena',
                 'email'=>'felipe.sosena@gmail.com',
                 'listName'=>'Feli Sosena',
             ],
             [
-                'username'=>'Cristian Prado Maüle',
+                'username'=>'cprado',
+                'fullName'=>'Cristian Prado Maüle',
                 'email'=>'cpradomaule@hotmail.com',
                 'listName'=>'Cristian Prado',
             ],
             [
-                'username'=>'Gonzalo Rosica',
+                'username'=>'grosica',
+                'fullName'=>'Gonzalo Rosica',
                 'email'=>'gonzalo.rosica@gmail.com',
                 'listName'=>'Gonza Rosica',
             ],
             [
-                'username'=>'Luca Barrera',
+                'username'=>'lbarrera',
+                'fullName'=>'Luca Barrera',
                 'email'=>'luca_barrera@live.com.ar',
                 'listName'=>'Luca Barrera',
             ],
             [
-                'username'=>'Josefina Caeiro',
+                'username'=>'jcaeiro',
+                'fullName'=>'Josefina Caeiro',
                 'email'=>'jochhe1507@gmail.com',
                 'listName'=>'Astrid Carosella',
             ],
             [
-                'username'=>'Nicolas Landa',
+                'username'=>'nlanda',
+                'fullName'=>'Nicolas Landa',
                 'email'=>'niclanda321@gmail.com',
                 'listName'=>'Nicolas Landa',
             ],
             [
-                'username'=>'Agustin Gris',
+                'username'=>'agris',
+                'fullName'=>'Agustin Gris',
                 'email'=>'agus_eventos@hotmail.com',
                 'listName'=>'Agus Gris',
             ],
             [
-                'username'=>'Gaston Salibe',
+                'username'=>'gsalibe',
+                'fullName'=>'Gaston Salibe',
                 'email'=>'gsalibe@gmail.com',
                 'listName'=>'Gaston Salibe',
             ],
             [
-                'username'=>'Gonzalo Grau',
+                'username'=>'ggrau',
+                'fullName'=>'Gonzalo Grau',
                 'email'=>'barrasgonza@hotmail.com',
                 'listName'=>'Gonza Kravi',
             ],
             [
-                'username'=>'Camila Capria',
+                'username'=>'ccapria',
+                'fullName'=>'Camila Capria',
                 'email'=>'cam_capria@hotmail.com',
                 'listName'=>'Cami Capria',
             ],
             [
-                'username'=>'Narella Versace',
+                'username'=>'nversace',
+                'fullName'=>'Narella Versace',
                 'email'=>'nareversace@hotmail.com',
-                'listName'=>'Narella Versace',
+                'listName'=>'Nare Versace',
             ],
             [
-                'username'=>'Matheus Mocciola',
+                'username'=>'mmocciola',
+                'fullName'=>'Matheus Mocciola',
                 'email'=>'matheusmocciola10@gmail.com',
                 'listName'=>'Matheus Mocciola',
             ]
@@ -109,6 +126,7 @@ class m170322_001555_add_users extends Migration
                 $userData =  new \common\models\UserData();
                 $userData->idUser = $user->id;
                 $userData->listName = $u['listName'];
+                $userData->fullName = $u['fullName'];
                 $userData->save();
             }
 

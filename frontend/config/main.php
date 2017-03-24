@@ -37,6 +37,7 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => require(__DIR__.'/urlrules.php'),

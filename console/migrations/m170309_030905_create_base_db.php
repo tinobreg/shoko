@@ -57,6 +57,7 @@ class m170309_030905_create_base_db extends Migration
         $this->createTable('user_data', array(
             'idListName' => Schema::TYPE_PK,
             'idUser' => Schema::TYPE_INTEGER.' NOT NULL',
+            'fullName' => Schema::TYPE_STRING,
             'listName' => Schema::TYPE_STRING,
             'instagram' => Schema::TYPE_STRING,
             'phone' => Schema::TYPE_STRING,

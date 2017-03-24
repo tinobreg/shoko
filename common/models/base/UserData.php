@@ -12,6 +12,7 @@ use Yii;
  * @property integer $idListName
  * @property integer $idUser
  * @property string $listName
+ * @property string $fullName
  * @property string $instagram
  * @property string $phone
  *
@@ -40,7 +41,7 @@ abstract class UserData extends \yii\db\ActiveRecord
         return [
             [['idUser'], 'required'],
             [['idUser'], 'integer'],
-            [['listName', 'instagram', 'phone'], 'string', 'max' => 255],
+            [['listName', 'fullName', 'instagram', 'phone'], 'string', 'max' => 255],
             [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['idUser' => 'id']]
         ];
     }
@@ -54,6 +55,7 @@ abstract class UserData extends \yii\db\ActiveRecord
             'idListName' => Yii::t('app', 'Id List Name'),
             'idUser' => Yii::t('app', 'Id User'),
             'listName' => Yii::t('app', 'List Name'),
+            'fullName' => Yii::t('app', 'Full Name'),
             'instagram' => Yii::t('app', 'Instagram'),
             'phone' => Yii::t('app', 'Phone'),
         ];

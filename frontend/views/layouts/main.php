@@ -30,7 +30,7 @@ AppAsset::register($this);
     <div class="container">
         <div class="row">
             <div class="col-xs-12" align="center" >
-                <?=Html::a(\yii\helpers\Html::img(Yii::$app->params['imageBaseUrl'].'images/shoko.png', ['class'=>'img-responsive', 'style'=>'height:60px']),Yii::$app->homeUrl)?>
+                <?=Html::a(\yii\helpers\Html::img(Yii::$app->params['imageBaseUrl'].'images/shoko.png', ['class'=>'img-responsive', 'style'=>'height:80px']),Yii::$app->homeUrl)?>
             </div>
         </div>
     </div>
