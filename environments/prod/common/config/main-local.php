@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
+            'dsn' => 'mysql:host=localhost;dbname=shoko_database',
+            'username' => 'tinobreg_shoko',
+            'password' => 'ShokoBsAs2017',
             'charset' => 'utf8',
         ],
         'mailer' => [
