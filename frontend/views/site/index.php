@@ -2,6 +2,8 @@
 /* @var $this yii\web\View */
 /* @var $users /common/models/User[] */
 
+use \yii\helpers\Url;
+
 $this->title = '.: Shôko Bs As :.';
 ?>
 <div class="site-index" style="min-height: 600px">
@@ -21,7 +23,7 @@ $this->title = '.: Shôko Bs As :.';
         <div class="row" style="padding-bottom: 20px">
             <?php foreach($users as $user){?>
                 <div class="col-xs-6 col-sm-3">
-                    <?=\yii\helpers\Html::a($user->userData0->listName, ['list/index', 'idUser'=>$user->id], ['class'=>'btn btn-block btn-shoko', 'style'=>'margin-bottom: 15px']);?>
+                    <?=\yii\helpers\Html::a($user->userData0->listName, Url::to(['list/index', 'idUser'=>$user->id]), ['class'=>'btn btn-block btn-shoko', 'style'=>'margin-bottom: 15px']);?>
                 </div>
             <?php } ?>
         </div>
