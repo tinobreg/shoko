@@ -5,7 +5,7 @@ return [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=shoko_database',
             'username' => 'tinobreg',
-            'password' => 'C0MPUT4C10n',
+            'password' => 'C123123123',
             'charset' => 'utf8',
         ],
         'mailer' => [
