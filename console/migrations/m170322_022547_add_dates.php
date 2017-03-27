@@ -6,7 +6,7 @@ class m170322_022547_add_dates extends Migration
 {
     public function up()
     {
-        $dates = [1490313600, 1490918400, 1491523200, 1492128000];
+        $dates = [1490918400, 1491523200, 1492128000];
 
         foreach ($dates as $id=>$date){
             $newDate = new \common\models\Date();

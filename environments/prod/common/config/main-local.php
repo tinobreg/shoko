@@ -4,8 +4,8 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=shoko_database',
-            'username' => 'tinobreg_shoko',
-            'password' => 'ShokoBsAs2017',
+            'username' => 'tinobreg',
+            'password' => 'C0MPUT4C10n',
             'charset' => 'utf8',
         ],
         'mailer' => [
