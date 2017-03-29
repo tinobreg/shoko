@@ -42,7 +42,8 @@ abstract class ListFriday extends \yii\db\ActiveRecord
     {
         return [
             [['idUser', 'name', 'lastName', 'phone', 'idDate'], 'required'],
-            [['idUser', 'birthday', 'idDate'], 'integer'],
+            [['idUser', 'idDate'], 'integer'],
+            [['birthday'], 'safe'],
             [['name', 'lastName', 'phone', 'instagram'], 'string', 'max' => 255],
             [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['idUser' => 'id']]
         ];

@@ -66,7 +66,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; Shoko Listas <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">Desarrollado por <a href="http://www.tinobreg.com">Martin Obregon</a></p>
     </div>
 </footer>
 

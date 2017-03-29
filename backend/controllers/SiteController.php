@@ -60,7 +60,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->redirect(['list/index', 'idUser'=>Yii::$app->user->getId()]);
+        return $this->redirect(['list/index']);
     }
 
     /**

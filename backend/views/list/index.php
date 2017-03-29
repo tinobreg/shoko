@@ -36,6 +36,13 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
 
     <hr />
 
+    <div class="clearfix">
+        <?php $dates = \common\models\Date::find()->where('status!='.\common\models\Date::STATUS_DONE)->all();?>
+        <?php foreach($dates as $d){
+           echo Html::a(date('d M Y',$d->date), ['list/index', 'idDate'=>$d->idDate], ['class'=>'btn btn-success', 'style'=>'margin: 5px']);
+        }?>
+    </div>
+
     <div class="table-responsive">
         <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -75,7 +82,7 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
 			[
                 'attribute'=>'birthday',
                 'value'=>function($model){
-                    return date('d-m-Y', $model->birthday);
+                    return date('d M Y', $model->birthday);
                 }
             ],
 			'instagram',

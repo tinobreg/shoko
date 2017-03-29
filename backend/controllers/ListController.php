@@ -31,11 +31,15 @@ class ListController extends Controller
      * Lists all ListFriday models.
      * @return mixed
      */
-    public function actionIndex($idUser)
+    public function actionIndex($idDate = null)
     {
-        $date = Date::findOne(['status'=>Date::STATUS_ACTIVE]);
+        if(empty($idDate)){
+            $date = Date::findOne(['status'=>Date::STATUS_ACTIVE]);
+        }else{
+            $date = Date::findOne($idDate);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => ListFriday::find()->where(['idUser'=>$idUser, 'idDate'=>$date->primaryKey]),
+            'query' => ListFriday::find()->where(['idUser'=>\Yii::$app->user->id, 'idDate'=>$date->primaryKey]),
         ]);
 
         Tabs::clearLocalStorage();
@@ -58,14 +62,18 @@ class ListController extends Controller
     public function actionUpdate($idListFriday)
     {
         $model = $this->findModel($idListFriday);
+        $model->birthday = date('d M Y', $model->birthday);
 
-        if ($model->load($_POST) && $model->save()) {
-            return $this->redirect(Url::previous());
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load($_POST)){
+            $model->birthday = strtotime($model->birthday);
+            if($model->save()){
+                return $this->redirect(['list/index']);
+            }
+
         }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
