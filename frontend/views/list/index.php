@@ -55,7 +55,7 @@ $this->title = '.: Shôko Bs | Listas :.';
                 <?= Html::a(FA::icon('facebook'), 'javascript:;', [
                     'target' => '_blank',
                     'class'=>'btn btn-facebook btn-success btn-block share-fb',
-                    'data-share-url'=>Url::to(['list/index', 'idUser'=>$idUser, 'list'=>seoParam($model->listOwner)])
+                    'data-share-url'=>Yii::$app->urlManager->createAbsoluteUrl(['list/index', 'idUser'=>$idUser, 'list'=>seoParam($model->listOwner)])
                 ]); ?>
             </div>
             <div class="col-xs-4 col-sm-6">
@@ -63,7 +63,7 @@ $this->title = '.: Shôko Bs | Listas :.';
                     ['class'=>'btn btn-twitter btn-success btn-block share-tw', 'target' => '_blank']); ?>
             </div>
             <div class="col-xs-4 visible-xs">
-                <?= Html::a(FA::icon('whatsapp'), 'whatsapp://send?text='. urlencode('Anotate a la lista de '.$model->listOwner.' en '. Url::to(['list/index', 'idUser'=>$idUser, 'list'=>seoParam($model->listOwner)])), [
+                <?= Html::a(FA::icon('whatsapp'), 'whatsapp://send?text='. urlencode('Anotate a la lista de '.$model->listOwner.' en '. Yii::$app->urlManager->createAbsoluteUrl(['list/index', 'idUser'=>$idUser, 'list'=>seoParam($model->listOwner)])), [
                     'data-action'=>'share/whatsapp/share',
                     'class'=>'btn btn-whatsapp btn-success btn-block',
                 ]); ?>
