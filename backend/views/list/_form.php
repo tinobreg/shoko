@@ -37,12 +37,11 @@ use yii\helpers\StringHelper;
 
 <!-- attribute birthday -->
             <?= $form->field($model, 'birthday')->widget(\kartik\date\DatePicker::classname(), [
-                'language'=>'es',
                 'readonly'=>true,
                 'removeButton' => false,
                 'pluginOptions' => [
                     'autoclose'=>true,
-                    'format'=> 'd M Y'
+                    'format' => 'dd-M-yyyy'
                 ]
             ]);?>
 

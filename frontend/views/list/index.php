@@ -39,6 +39,7 @@ $this->title = '.: Shôko Bs | Listas :.';
                 'removeButton' => false,
                 'pluginOptions' => [
                     'autoclose'=>true,
+                    'format' => 'dd-M-yyyy'
                 ]
             ]);?>
         </div>
