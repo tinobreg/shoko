@@ -62,7 +62,7 @@ class ListController extends Controller
     public function actionUpdate($idListFriday)
     {
         $model = $this->findModel($idListFriday);
-        $model->birthday = date('d-M-Y', $model->birthday);
+        $model->birthday = date('m/d/Y', $model->birthday);
 
         if ($model->load($_POST)){
             $model->birthday = strtotime($model->birthday);

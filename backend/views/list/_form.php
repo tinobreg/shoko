@@ -41,7 +41,7 @@ use yii\helpers\StringHelper;
                 'removeButton' => false,
                 'pluginOptions' => [
                     'autoclose'=>true,
-                    'format' => 'dd-M-yyyy'
+                    'format'=>'mm/dd/yyyy'
                 ]
             ]);?>
 

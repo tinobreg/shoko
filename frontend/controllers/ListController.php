@@ -39,7 +39,7 @@ class ListController extends Controller
                 $list = new ListFriday();
                 $list->name = $model->name;
                 $list->lastName = $model->lastName;
-                $list->birthday = (int)strtotime($model->birthday);
+                $list->birthday = strtotime($model->birthday);
                 $list->instagram = $model->instagram;
                 $list->phone =  $model->phone;
                 $list->idUser = $idUser;
