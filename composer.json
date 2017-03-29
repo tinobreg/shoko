@@ -23,7 +23,8 @@
         "bower-asset/bootstrap": "~3.3",
         "alexandernst/yii2-device-detect": "0.0.9",
         "skeeks/yii2-assets-auto-compress":"*",
-        "kartik-v/yii2-widget-datepicker": "@dev"
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "rmrevin/yii2-fontawesome": "~2.15"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

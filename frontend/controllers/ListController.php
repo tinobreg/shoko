@@ -61,7 +61,6 @@ class ListController extends Controller
         return $this->render('index', [
             'model'=>$model,
             'idUser'=>$idUser,
-            'list'=>$user->userData0->listName
         ]);
     }
 

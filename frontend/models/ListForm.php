@@ -24,7 +24,7 @@ class ListForm extends Model
     public function rules()
     {
         return [
-            [['name', 'lastName', 'phone', 'birthday'], 'required', 'message'=>'{attribute} no puede estar vacío.'],
+            [['name', 'lastName', 'phone', 'birthday', 'instagram'], 'required', 'message'=>'{attribute} no puede estar vacío.'],
             [['name', 'lastName', 'phone', 'instagram', 'listOwner', 'birthday'], 'string']
         ];
     }
@@ -38,7 +38,7 @@ class ListForm extends Model
             'name'=>'Nombre',
             'lastName'=>'Apellido',
             'phone'=>'Telefono',
-            'instagram'=>'Instagram',
+            'instagram'=>'Instagram / Twitter / Facebook',
             'birthday'=>'Cumpleaños',
             'listOwner'=>'Lista'
         ];
