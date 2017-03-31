@@ -37,8 +37,17 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Inicio', 'url' => ['/site/index']]
     ];
+    $users = \common\models\User::find()->all();
+    $items = [];
+
+    foreach($users as $u){
+        $items[]=['label' => $u->userData0->listName, 'url' => ['/list/index', 'idUser'=>$u->id]];
+    }
+
     if(!Yii::$app->user->isGuest){
         $menuItems []=['label' => 'Listas', 'url' => ['/list/index']];
+        if(in_array(Yii::$app->user->id, getAdmins()))
+        $menuItems []=['label' => 'Otras Listas', 'items'=>$items];
     }
 
     if (Yii::$app->user->isGuest) {

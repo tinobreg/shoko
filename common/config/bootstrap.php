@@ -38,3 +38,8 @@ function seoParam($title)
     $str = preg_replace('/-+/', "-", $str);
     return $str;
 }
+
+function getAdmins()
+{
+    return [1, 12, 14];
+}
