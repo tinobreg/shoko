@@ -34,14 +34,19 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
         <?= Yii::t('app', 'Lista') ?> -  <?= date('d F', $date->date) ?>
     </h1>
 
-    <hr />
-
     <div class="clearfix">
-        <?php $dates = \common\models\Date::find()->where('status!='.\common\models\Date::STATUS_DONE)->all();?>
-        <?php foreach($dates as $d){
-           echo Html::a(date('d M Y',$d->date), ['list/index', 'idDate'=>$d->idDate], ['class'=>'btn btn-success', 'style'=>'margin: 5px']);
-        }?>
+        <div class="pull-left">
+            <?php $dates = \common\models\Date::find()->where('status!='.\common\models\Date::STATUS_DONE)->all();?>
+            <?php foreach($dates as $d){
+                echo Html::a(date('d M Y',$d->date), ['list/index', 'idDate'=>$d->idDate], ['class'=>'btn btn-success', 'style'=>'margin: 5px']);
+            }?>
+        </div>
+        <div class="pull-right">
+            <?= Html::a('<i class="fa fa-download" aria-hidden="true"></i> Descargar Excel', $url, ['class'=>'btn btn-success'])?>
+        </div>
     </div>
+
+    <hr />
 
     <div class="table-responsive">
         <?= GridView::widget([

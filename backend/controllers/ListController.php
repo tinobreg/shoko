@@ -6,11 +6,13 @@ namespace backend\controllers;
 
 use common\models\Date;
 use common\models\ListFriday;
+use common\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
+use Yii;
 use dmstr\bootstrap\Tabs;
 
 /**
@@ -31,7 +33,7 @@ class ListController extends Controller
      * Lists all ListFriday models.
      * @return mixed
      */
-    public function actionIndex($idDate = null)
+    public function actionIndex($idDate = null, $idUser = null, $export = false)
     {
         if(empty($idDate)){
             $date = Date::findOne(['status'=>Date::STATUS_ACTIVE]);
@@ -39,7 +41,7 @@ class ListController extends Controller
             $date = Date::findOne($idDate);
         }
         $dataProvider = new ActiveDataProvider([
-            'query' => ListFriday::find()->where(['idUser'=>\Yii::$app->user->id, 'idDate'=>$date->primaryKey]),
+            'query' => ListFriday::find()->where(['idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id), 'idDate'=>$date->primaryKey])->orderBy('name ASC, lastName ASC'),
         ]);
 
         Tabs::clearLocalStorage();
@@ -47,10 +49,74 @@ class ListController extends Controller
         Url::remember();
         \Yii::$app->session['__crudReturnUrl'] = null;
 
+        if($export == true){
+            $lists = ListFriday::find()->where(['idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id), 'idDate'=>$date->primaryKey])->orderBy('name ASC, lastName ASC')->all();
+            $this->exportList($lists, (!empty($idUser)?$idUser:Yii::$app->user->id), $date->primaryKey);
+        }
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'date'=>$date,
+            'url'=> Url::to(['list/index', 'idDate'=>$date->primaryKey, 'idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id), 'export'=>true])
         ]);
+    }
+
+
+    public function exportList($list, $idUser, $idDate)
+    {
+        $user = User::findById($idUser);
+        $date = Date::findOne($idDate);
+
+        $phpExcel = new \PHPExcel();
+
+        $worksheet = $phpExcel->getActiveSheet();
+        $rowIterator = $worksheet->getRowIterator();
+
+        $this->writeRow(
+            $rowIterator,
+            ['Lista de '.$user->userData0->listName, Yii::$app->formatter->asDate($date->date, 'yyyy-MM-dd')]
+        );
+
+        //Write header
+        $this->writeRow($rowIterator, ['Nombre', 'Apellido']);
+
+        foreach ($list as $guest) {
+            $data = [
+                $guest->name,
+                $guest->lastName,
+            ];
+            $this->writeRow($rowIterator, $data);
+        }
+
+        $objWriter = \PHPExcel_IOFactory::createWriter($phpExcel, 'Excel2007');
+        $filename = Yii::$app->formatter->asDate($date->date, 'yyyy-MM-dd') . '-'.seoParam($user->userData0->listName).'.xlsx';
+
+        $file = '/tmp/' . uniqid();
+        $objWriter->save($file);
+
+        Yii::$app->response->sendFile($file, $filename)->send();
+        @unlink($file);
+
+        return false;
+    }
+
+    /**
+     * Writes the row of data from the given row iterator and the data to write in the cell
+     * @param \PHPExcel_Worksheet_RowIterator $rowIterator
+     * @param array $data the data that belongs to each cell of the row pointed by the row iterator
+     */
+    protected function writeRow(\PHPExcel_Worksheet_RowIterator $rowIterator, $data)
+    {
+        $row = $rowIterator->current();
+        $cellIterator = $row->getCellIterator();
+        $cellIterator->setIterateOnlyExistingCells(false);
+
+        foreach ($data as $cellValue) {
+            $cell = $cellIterator->current();
+            $cell->setValue($cellValue);
+            $cellIterator->next();
+        }
+        $rowIterator->next();
     }
 
     /**

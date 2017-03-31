@@ -24,7 +24,8 @@
         "alexandernst/yii2-device-detect": "0.0.9",
         "skeeks/yii2-assets-auto-compress":"*",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "rmrevin/yii2-fontawesome": "~2.15"
+        "rmrevin/yii2-fontawesome": "~2.15",
+        "phpoffice/phpexcel" : "1.8.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
