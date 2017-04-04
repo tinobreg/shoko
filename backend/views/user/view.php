@@ -30,10 +30,7 @@ $this->params['breadcrumbs'][] = 'View';
     <?php endif; ?>
 
     <h1>
-        <?= Yii::t('app', 'User') ?>
-        <small>
-            <?= $model->id ?>
-        </small>
+        <?= Yii::t('app', 'Usuario').': '.$model->username.' ('.$model->userData0->fullName.')' ?>
     </h1>
 
 
@@ -42,65 +39,47 @@ $this->params['breadcrumbs'][] = 'View';
         <!-- menu buttons -->
         <div class='pull-left'>
             <?= Html::a(
-            '<span class="glyphicon glyphicon-pencil"></span> ' . 'Edit',
+            '<span class="glyphicon glyphicon-pencil"></span> ' . 'Editar',
             [ 'update', 'id' => $model->id],
             ['class' => 'btn btn-info']) ?>
-
-            <?= Html::a(
-            '<span class="glyphicon glyphicon-copy"></span> ' . 'Copy',
-            ['create', 'id' => $model->id, 'User'=>$copyParams],
-            ['class' => 'btn btn-success']) ?>
-
-            <?= Html::a(
-            '<span class="glyphicon glyphicon-plus"></span> ' . 'New',
-            ['create'],
-            ['class' => 'btn btn-success']) ?>
-        </div>
-
-        <div class="pull-right">
-            <?= Html::a('<span class="glyphicon glyphicon-list"></span> '
-            . 'Full list', ['index'], ['class'=>'btn btn-default']) ?>
         </div>
 
     </div>
 
     <hr />
 
-    <?php $this->beginBlock('common\models\User'); ?>
 
-    
     <?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-            'status',
-    ],
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'username',
+            'email',
+            [
+                'attribute'=>'status',
+                'value'=> $model->getStatus()
+            ],
+        ],
+    ]); ?>
+
+    <?= DetailView::widget([
+        'model' => $model->userData0,
+        'attributes' => [
+            'fullName',
+            'listName',
+            'instagram',
+            'phone'
+        ],
     ]); ?>
 
     
     <hr/>
 
-    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Delete', ['delete', 'id' => $model->id],
+    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . 'Borrar ', ['delete', 'id' => $model->id],
     [
     'class' => 'btn btn-danger',
     'data-confirm' => '' . 'Are you sure to delete this item?' . '',
     'data-method' => 'post',
     ]); ?>
-    <?php $this->endBlock(); ?>
 
-
-    
-    <?= Tabs::widget(
-                 [
-                     'id' => 'relation-tabs',
-                     'encodeLabels' => false,
-                     'items' => [
- [
-    'label'   => '<b class=""># '.$model->id.'</b>',
-    'content' => $this->blocks['common\models\User'],
-    'active'  => true,
-],
- ]
-                 ]
-    );
-    ?>
 </div>

@@ -33,7 +33,7 @@ class ListController extends Controller
      */
     public function actionIndex($idDate = null, $idUser = null, $export = false)
     {
-        if(Yii::$app->user->can('shokoUser') && (!empty($idUser) && Yii::$app->user->id != $idUser)){
+        if(!Yii::$app->user->can('shokoManager') && (!empty($idUser) && Yii::$app->user->id != $idUser)){
             return $this->redirect(['index']);
         }
 

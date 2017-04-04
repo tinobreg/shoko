@@ -64,6 +64,20 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', '#'),
+            'username' => Yii::t('app', 'Usuario'),
+            'email' => Yii::t('app', 'Email'),
+            'status' => Yii::t('app', 'Estado'),
+            'idUserType' => Yii::t('app', 'Tipo de Usuario'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
@@ -220,5 +234,49 @@ class User extends ActiveRecord implements IdentityInterface
     public function getUserData0()
     {
         return $this->hasOne(\common\models\UserData::className(), ['idUser' => 'id']);
+    }
+
+    public function getUserTypes(){
+        return [
+            self::USER_USER => self::getUserTypeDesc(self::USER_USER),
+            self::USER_MANAGER => self::getUserTypeDesc(self::USER_MANAGER),
+        ];
+    }
+
+    public function getUserTypeDesc($type){
+        switch($type){
+            case self::USER_USER:
+                return 'Usuario';
+            break;
+            case self::USER_MANAGER:
+                return 'Administrador';
+            break;
+        }
+    }
+
+    public function getUserType(){
+        return $this->getUserTypeDesc($this->idUserType);
+    }
+
+    public function getStatuses(){
+        return [
+            self::STATUS_ACTIVE => self::getStatusDesc(self::STATUS_ACTIVE),
+            self::STATUS_DELETED => self::getStatusDesc(self::STATUS_DELETED),
+        ];
+    }
+
+    public function getStatusDesc($type){
+        switch($type){
+            case self::STATUS_ACTIVE:
+                return 'Activo';
+                break;
+            case self::STATUS_DELETED:
+                return 'Desactivado';
+                break;
+        }
+    }
+
+    public function getStatus(){
+        return $this->getStatusDesc($this->status);
     }
 }

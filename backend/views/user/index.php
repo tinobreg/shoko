@@ -9,14 +9,14 @@ use yii\grid\GridView;
 * @var yii\data\ActiveDataProvider $dataProvider
 */
 
-$this->title = Yii::t('app', 'Users');
+$this->title = Yii::t('app', 'Usuarios');
 $this->params['breadcrumbs'][] = $this->title;
 
 if (isset($actionColumnTemplates)) {
 $actionColumnTemplate = implode(' ', $actionColumnTemplates);
     $actionColumnTemplateString = $actionColumnTemplate;
 } else {
-Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']);
+Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'Crear', ['create'], ['class' => 'btn btn-success']);
     $actionColumnTemplateString = "{view} {update} {delete}";
 }
 $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTemplateString.'</div>';
@@ -30,40 +30,11 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
     <?php \yii\widgets\Pjax::begin(['id'=>'pjax-main', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
 
     <h1>
-        <?= Yii::t('app', 'Users') ?>
-        <small>
-            List
-        </small>
+        <?= Yii::t('app', 'Usuarios') ?>
     </h1>
     <div class="clearfix crud-navigation">
         <div class="pull-left">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']) ?>
-        </div>
-
-        <div class="pull-right">
-
-                        
-            <?= 
-            \yii\bootstrap\ButtonDropdown::widget(
-            [
-            'id' => 'giiant-relations',
-            'encodeLabel' => false,
-            'label' => '<span class="glyphicon glyphicon-paperclip"></span> ' . 'Relations',
-            'dropdown' => [
-            'options' => [
-            'class' => 'dropdown-menu-right'
-            ],
-            'encodeLabels' => false,
-            'items' => [
-
-]
-            ],
-            'options' => [
-            'class' => 'btn-default'
-            ]
-            ]
-            );
-            ?>
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'Crear', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
     </div>
 
@@ -101,7 +72,22 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
             },
             'contentOptions' => ['nowrap'=>'nowrap']
         ],
-			'status',
+			'id',
+            'username',
+            [
+                'attribute'=>'Nombre Apellido',
+                'value'=> function($model){ return $model->userData0->fullName;}
+            ],
+            'email',
+            'username',
+            [
+                'attribute'=>'idUserType',
+                'value'=> function($model){ return $model->getUserType();}
+            ],
+            [
+                'attribute'=>'status',
+                'value'=> function($model){ return $model->getStatus();}
+            ],
         ],
         ]); ?>
     </div>

@@ -54,14 +54,21 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Ingresar', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
+        $userItems [] = ['label' => 'Editar Información', 'url'=>['/user/updateInfo', 'id'=> Yii::$app->user->id]];
+        $userItems [] = ['label' => 'Cambiar contraseña', 'url'=>['/user/updatePass', 'id'=> Yii::$app->user->id]];
+        if(Yii::$app->user->can('shokoManager')) {
+            $userItems [] = ['label' => 'Administrar Usuarios', 'url'=>['/user/index']];
+        }
+        $userItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Cerrar Sesion (' . Yii::$app->user->identity->userData0->fullName . ')',
-                ['class' => 'btn btn-link logout']
+                'Cerrar Sesion',
+                ['class' => 'btn btn-danger btn-block']
             )
             . Html::endForm()
             . '</li>';
+
+        $menuItems[] = ['label' => Yii::$app->user->identity->userData0->fullName, 'items' => $userItems];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

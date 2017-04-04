@@ -18,6 +18,26 @@ use dmstr\bootstrap\Tabs;
 class UserController extends Controller
 {
 
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view', 'updateInfo', 'updatePass'],
+                        'roles' => ['shokoUser'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create', 'delete'],
+                        'roles' => ['shokoManager'],
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * @var boolean whether to enable CSRF validation for the actions in this controller.
@@ -112,27 +132,10 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        try {
-            $this->findModel($id)->delete();
-        } catch (\Exception $e) {
-            $msg = (isset($e->errorInfo[2]))?$e->errorInfo[2]:$e->getMessage();
-            \Yii::$app->getSession()->addFlash('error', $msg);
-            return $this->redirect(Url::previous());
-        }
-
-// TODO: improve detection
-        $isPivot = strstr('$id',',');
-        if ($isPivot == true) {
-            return $this->redirect(Url::previous());
-        } elseif (isset(\Yii::$app->session['__crudReturnUrl']) && \Yii::$app->session['__crudReturnUrl'] != '/') {
-            Url::remember(null);
-            $url = \Yii::$app->session['__crudReturnUrl'];
-            \Yii::$app->session['__crudReturnUrl'] = null;
-
-            return $this->redirect($url);
-        } else {
-            return $this->redirect(['index']);
-        }
+        $model = $this->findModel($id);
+        $model->status = $model::STATUS_DELETED;
+        $model->save();
+        return $this->redirect(['index']);
     }
 
     /**
