@@ -46,8 +46,9 @@ AppAsset::register($this);
 
     if(!Yii::$app->user->isGuest){
         $menuItems []=['label' => 'Listas', 'url' => ['/list/index']];
-        if(in_array(Yii::$app->user->id, getAdmins()))
-        $menuItems []=['label' => 'Otras Listas', 'items'=>$items];
+        if(Yii::$app->user->can('shokoManager')) {
+            $menuItems [] = ['label' => 'Otras Listas', 'items' => $items];
+        }
     }
 
     if (Yii::$app->user->isGuest) {

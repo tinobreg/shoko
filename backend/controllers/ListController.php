@@ -20,8 +20,6 @@ use dmstr\bootstrap\Tabs;
  */
 class ListController extends Controller
 {
-
-
     /**
      * @var boolean whether to enable CSRF validation for the actions in this controller.
      * CSRF validation is enabled only when both this property and [[Request::enableCsrfValidation]] are true.
@@ -35,6 +33,10 @@ class ListController extends Controller
      */
     public function actionIndex($idDate = null, $idUser = null, $export = false)
     {
+        if(Yii::$app->user->can('shokoUser') && (!empty($idUser) && Yii::$app->user->id != $idUser)){
+            return $this->redirect(['index']);
+        }
+
         if(empty($idDate)){
             $date = Date::findOne(['status'=>Date::STATUS_ACTIVE]);
         }else{
