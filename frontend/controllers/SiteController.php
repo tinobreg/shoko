@@ -73,7 +73,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $users = User::find()->all();
+        $users = User::find()->where(['status'=> User::STATUS_ACTIVE])->all();
         return $this->render('index', ['users'=>$users]);
     }
 
