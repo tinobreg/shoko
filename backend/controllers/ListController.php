@@ -63,35 +63,82 @@ class ListController extends Controller
         ]);
     }
 
+    public function actionAllData($idUser = null, $export = false)
+    {
+        if(!Yii::$app->user->can('shokoManager') && (!empty($idUser) && Yii::$app->user->id != $idUser)){
+            return $this->redirect(['index']);
+        }
 
-    public function exportList($list, $idUser, $idDate)
+        $dataProvider = new ActiveDataProvider([
+            'query' => ListFriday::find()->where(['idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id)])->orderBy('name ASC, lastName ASC'),
+        ]);
+
+
+        if($export == true){
+            $lists = ListFriday::find()->where(['idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id)])->orderBy('name ASC, lastName ASC')->all();
+            $this->exportList($lists, (!empty($idUser)?$idUser:Yii::$app->user->id), null, 'data');
+        }
+
+        return $this->render('data', [
+            'dataProvider' => $dataProvider,
+            'url'=> Url::to(['list/all-data', 'idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id), 'export'=>true])
+        ]);
+    }
+
+    public function exportList($list, $idUser, $idDate, $type = 'list')
     {
         $user = User::findById($idUser);
-        $date = Date::findOne($idDate);
 
         $phpExcel = new \PHPExcel();
 
         $worksheet = $phpExcel->getActiveSheet();
         $rowIterator = $worksheet->getRowIterator();
 
-        $this->writeRow(
-            $rowIterator,
-            ['Lista de '.$user->userData0->listName, Yii::$app->formatter->asDate($date->date, 'yyyy-MM-dd')]
-        );
+        $title [] = 'Lista de '.$user->userData0->listName;
+
+        if($type == 'list') {
+            $date = Date::findOne($idDate);
+            $title [] = Yii::$app->formatter->asDate($date->date, 'yyyy-MM-dd');
+        }else {
+            $title [] = ' ';
+            $title [] = ' ';
+            $title [] = ' ';
+            $title [] = ' ';
+        }
+
+        $this->writeRow($rowIterator, $title);
 
         //Write header
-        $this->writeRow($rowIterator, ['Nombre', 'Apellido']);
+        $columns = ['Nombre', 'Apellido'];
+
+        if($type == 'data') {
+            $columns[]= 'Instagram';
+            $columns[]= 'Fecha de Nacimiento';
+            $columns[]= 'Telefono';
+        }
+
+        $this->writeRow($rowIterator,$columns);
 
         foreach ($list as $guest) {
             $data = [
                 $guest->name,
                 $guest->lastName,
             ];
+            if($type == 'data') {
+                $data[] = (string)$guest->instagram;
+                $data[] = Yii::$app->formatter->asDate($guest->birthday, 'yyyy-MM-dd');
+                $data[] = str_replace(['+', '-'],'',$guest->phone);
+            }
             $this->writeRow($rowIterator, $data);
         }
 
         $objWriter = \PHPExcel_IOFactory::createWriter($phpExcel, 'Excel2007');
-        $filename = Yii::$app->formatter->asDate($date->date, 'yyyy-MM-dd') . '-'.seoParam($user->userData0->listName).'.xlsx';
+
+        $filename = 'datos-'.seoParam($user->userData0->listName).'.xlsx';
+
+        if($type == 'list') {
+            $filename = Yii::$app->formatter->asDate($date->date, 'yyyy-MM-dd') . '-'.seoParam($user->userData0->listName).'.xlsx';
+        }
 
         $file = '/tmp/' . uniqid();
         $objWriter->save($file);

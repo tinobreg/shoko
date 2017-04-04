@@ -37,7 +37,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Inicio', 'url' => ['/site/index']]
     ];
-    $users = \common\models\User::find()->all();
+    $users = \common\models\User::find()->where(['status'=>\common\models\User::STATUS_ACTIVE])->all();
     $items = [];
 
     foreach($users as $u){
@@ -46,6 +46,7 @@ AppAsset::register($this);
 
     if(!Yii::$app->user->isGuest){
         $menuItems []=['label' => 'Listas', 'url' => ['/list/index']];
+        $menuItems []=['label' => 'Datos', 'url'=>['/list/all-data']];
         if(Yii::$app->user->can('shokoManager')) {
             $menuItems [] = ['label' => 'Otras Listas', 'items' => $items];
         }
