@@ -38,7 +38,7 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
         <div class="pull-left">
             <?php $dates = \common\models\Date::find()->where('status!='.\common\models\Date::STATUS_DONE)->all();?>
             <?php foreach($dates as $d){
-                echo Html::a(date('d M Y',$d->date), ['list/index', 'idDate'=>$d->idDate], ['class'=>'btn btn-success', 'style'=>'margin: 5px']);
+                echo Html::a(date('d M Y',$d->date), ['list/index', 'idDate'=>$d->idDate], ['class'=>'btn '.($d->status == \common\models\Date::STATUS_ACTIVE?'btn-success':'btn-default'), 'style'=>'margin: 5px']);
             }?>
         </div>
         <div class="pull-right">
