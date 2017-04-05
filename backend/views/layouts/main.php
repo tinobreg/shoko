@@ -55,8 +55,8 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Ingresar', 'url' => ['/site/login']];
     } else {
-        $userItems [] = ['label' => 'Editar Información', 'url'=>['/user/updateInfo', 'id'=> Yii::$app->user->id]];
-        $userItems [] = ['label' => 'Cambiar contraseña', 'url'=>['/user/updatePass', 'id'=> Yii::$app->user->id]];
+        $userItems [] = ['label' => 'Editar Información', 'url'=>['/user/update-info']];
+        $userItems [] = ['label' => 'Cambiar contraseña', 'url'=>['/user/update-pass']];
         if(Yii::$app->user->can('shokoManager')) {
             $userItems [] = ['label' => 'Administrar Usuarios', 'url'=>['/user/index']];
         }

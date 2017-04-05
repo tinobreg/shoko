@@ -4,6 +4,7 @@
 
 namespace backend\controllers;
 
+use backend\models\ChangePassWordForm;
 use common\models\User;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -26,7 +27,7 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'updateInfo', 'updatePass'],
+                        'actions' => ['view', 'update-info', 'update-pass'],
                         'roles' => ['shokoUser'],
                     ],
                     [
@@ -64,6 +65,33 @@ class UserController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionUpdatePass()
+    {
+        $model = new ChangePassWordForm();
+        if ($model->load($_POST)){
+            if($model->changePassword()){
+                \Yii::$app->session->setFlash('success', 'Se ha cambiado la contraseña');
+            } else {
+                \Yii::$app->session->setFlash('error', 'No se ha cambiado la contraseña');
+            }
+            $model = new ChangePassWordForm();
+        }
+        return $this->render('change_password', ['model'=>$model]);
+    }
+
+    public function actionUpdateInfo()
+    {
+        $model = $this->findModel();
+
+        if ($model->load($_POST) && $model->save()) {
+            return $this->redirect(Url::previous());
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
