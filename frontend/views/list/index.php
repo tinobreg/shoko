@@ -44,6 +44,9 @@ $this->title = '.: Shôko Bs | Listas :.';
                 'language'=>'es',
                 'readonly'=>true,
                 'removeButton' => false,
+                'options'=>[
+                    'value'=>'01/01/1999'
+                ],
                 'pluginOptions' => [
                     'autoclose'=>true,
                     'format'=>'mm/dd/yyyy'
