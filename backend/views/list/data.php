@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /**
 * @var yii\web\View $this
 * @var yii\data\ActiveDataProvider $dataProvider
-* @var common\models\Date $date
+* @var common\models\Date
 */
 
 $this->title = Yii::t('app', 'Datos');
@@ -21,6 +21,7 @@ Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphic
     $actionColumnTemplateString = "{update} {delete}";
 }
 $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTemplateString.'</div>';
+
 ?>
 <div class="giiant-crud list-friday-index">
 
@@ -85,6 +86,13 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
                 }
             ],
 			'instagram',
+            [
+                'attribute'=>'Viene este finde?',
+                'format'=>'html',
+                'value'=>function($model){
+                    return Html::a('Anotar', ['list/update-guest-date', 'guest'=>$model->idListFriday], ['class'=>'btn-info btn']);
+                }
+            ]
         ],
         ]); ?>
     </div>

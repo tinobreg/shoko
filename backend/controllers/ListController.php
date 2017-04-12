@@ -65,12 +65,20 @@ class ListController extends Controller
 
     public function actionAllData($idUser = null, $export = false)
     {
+
         if(!Yii::$app->user->can('shokoManager') && (!empty($idUser) && Yii::$app->user->id != $idUser)){
             return $this->redirect(['index']);
         }
 
+        if(empty($idDate)){
+            $date = Date::findOne(['status'=>Date::STATUS_ACTIVE]);
+        }else{
+            $date = Date::findOne($idDate);
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => ListFriday::find()->where(['idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id)])->orderBy('name ASC, lastName ASC'),
+            'query' => ListFriday::find()->where(['idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id)])
+            ->andWhere(['<>', 'idDate', $date->idDate])->orderBy('name ASC, lastName ASC'),
         ]);
 
 
@@ -81,7 +89,7 @@ class ListController extends Controller
 
         return $this->render('data', [
             'dataProvider' => $dataProvider,
-            'url'=> Url::to(['list/all-data', 'idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id), 'export'=>true])
+            'url'=> Url::to(['list/all-data', 'idUser'=>(!empty($idUser)?$idUser:Yii::$app->user->id), 'export'=>true]),
         ]);
     }
 
@@ -166,6 +174,21 @@ class ListController extends Controller
             $cellIterator->next();
         }
         $rowIterator->next();
+    }
+
+    public function actionUpdateGuestDate($guest, $idDate = null)
+    {
+        if(empty($idDate)){
+            $date = Date::findOne(['status'=>Date::STATUS_ACTIVE]);
+        }else{
+            $date = Date::findOne($idDate);
+        }
+
+        $guest = ListFriday::findOne($guest);
+        $guest->idDate = $date->primaryKey;
+        $guest->save();
+
+        return $this->redirect(['list/all-data']);
     }
 
     /**
