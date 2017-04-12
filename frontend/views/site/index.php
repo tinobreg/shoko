@@ -11,9 +11,7 @@ $this->title = '.: Shôko Bs As :.';
         <div class="row text-center">
             <div class="col-xs-12" style="padding: 40px 0">
                 <h1>Bienvenido a la revolución!</h1>
-                <p class="lead" style="text-decoration: line-through">Av. La Plata 735 - Caballito - Buenos Aires</p>
-                <p class="lead">SOLO POR ESTE VIERNES TE ESPERAMOS EN</p>
-                <h2>Av. CASARES 4015 y SARMIENTO (Brooklyn) - PALERMO - Buenos Aires</h2>
+                <p class="lead">Av. La Plata 735 - Caballito - Buenos Aires</p>
             </div>
         </div>
 

@@ -17,13 +17,6 @@ $this->title = '.: Shôko Bs | Listas :.';
     <h1>Bienvenido a la revolución</h1>
     <p class="lead">Completa tus datos para anotarte a la lista de <b><?=$model->listOwner?></b>.</p>
 
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <div class="bg-danger" style="color: black; font-weight: 600; text-align: center; padding: 15px">
-            <h2>Este Viernes abrimos en Palermo</h2>
-            <p>Av. Casares 4015 y Sarmiento (Brooklyn)</p>
-            <h4> TE ESPERAMOS!! </h4>
-        </div>
-    </div>
     <div class="col-xs-12 col-md-6 col-md-offset-3 text-left">
         <?= Alert::widget() ?>
         <?php $form = ActiveForm::begin(['id' => 'list-form', 'options'=>['class'=>'form']]); ?>
@@ -40,17 +33,8 @@ $this->title = '.: Shôko Bs | Listas :.';
             <?= $form->field($model, 'instagram')->textInput() ?>
         </div>
         <div class="form-group">
-            <?= $form->field($model, 'birthday')->widget(DatePicker::classname(), [
-                'language'=>'es',
-                'readonly'=>true,
-                'removeButton' => false,
-                'options'=>[
-                    'value'=>'01/01/1999'
-                ],
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format'=>'mm/dd/yyyy'
-                ]
+            <?= $form->field($model, 'birthday')->widget(\yii\widgets\MaskedInput::classname(), [
+                'clientOptions' => ['alias' =>  'mm/dd/yyyy']
             ]);?>
         </div>
         <div class="form-group">
